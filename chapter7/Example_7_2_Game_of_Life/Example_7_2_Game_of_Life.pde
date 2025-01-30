@@ -24,7 +24,7 @@ void draw() {
   // The next board
   int[][] next = create2DArray(columns, rows);
 
-  //{!2} Looping but skipping the edge cells
+  // Looping but skipping the edge cells
   for (int i = 1; i < columns - 1; i++) {
     for (int j = 1; j < rows - 1; j++) {
       // Add up all the neighbor states to
@@ -38,7 +38,7 @@ void draw() {
       // Correct by subtracting the cell state itself.
       neighborSum -= board[i][j];
 
-      //{!4} The rules of life!
+      // The rules of life!
       if (board[i][j] == 1 && neighborSum < 2) next[i][j] = 0;
       else if (board[i][j] == 1 && neighborSum > 3) next[i][j] = 0;
       else if (board[i][j] == 0 && neighborSum == 3) next[i][j] = 1;
@@ -48,7 +48,7 @@ void draw() {
 
   for (int i = 0; i < columns; i++) {
     for (int j = 0; j < rows; j++) {
-      //{!1} evaluates to 255 when state is 0 and 0 when state is 1
+      // evaluates to 255 when state is 0 and 0 when state is 1
       fill(255 - board[i][j] * 255);
       stroke(0);
       square(i * w, j * w, w);

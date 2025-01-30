@@ -11,14 +11,14 @@ int generation = 0;
 // Cell size
 int w = 10;
 
-//{!1} Rule 90
+// Rule 90
 int[] ruleset = {0, 1, 0, 1, 1, 0, 1, 0};
 
 void setup() {
   size(640, 320);
   background(255);
-  //{!5} An array of 0s and 1s
-  cells = new int[(int)Math.floor(width / w)];
+  // An array of 0s and 1s
+  cells = new int[(int) Math.floor(width / w)];
   for (int i = 0; i < cells.length; i++) {
     cells[i] = 0;
   }
@@ -27,15 +27,15 @@ void setup() {
 
 void draw() {
   for (int i = 1; i < cells.length - 1; i++) {
-    //{!1} Only drawing the cell's with a state of 1
+    // Only drawing the cell's with a state of 1
     if (cells[i] == 1) {
       fill(0);
-      //{!1} Set the y-position according to the generation.
+      // Set the y-position according to the generation.
       square(i * w, generation * w, w);
     }
   }
 
-  //{!7} Compute the next generation.
+  // Compute the next generation.
   int[] nextgen = cells.clone();
   for (int i = 1; i < cells.length - 1; i++) {
     int left = cells[i - 1];
@@ -45,7 +45,7 @@ void draw() {
   }
   cells = nextgen;
 
-  //{!1} The next generation
+  // The next generation
   generation++;
 
   // Stopping when it gets to the bottom of the canvas
@@ -54,7 +54,7 @@ void draw() {
   }
 }
 
-//{!4} Look up a new state from the ruleset.
+// Look up a new state from the ruleset.
 int rules(int a, int b, int c) {
   String s = "" + a + b + c;
   int index = Integer.parseInt(s, 2);

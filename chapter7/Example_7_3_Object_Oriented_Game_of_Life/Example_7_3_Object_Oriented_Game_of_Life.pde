@@ -15,25 +15,25 @@ void setup() {
   board = create2DArray(columns, rows);
   for (int i = 1; i < columns - 1; i++) {
     for (int j = 1; j < rows - 1; j++) {
-      board[i][j] = new Cell(floor(random(2)), i * w, j * w, w);
+      board[i][j] = new Cell((int) Math.floor(random(2)), i * w, j * w, w);
     }
   }
 }
 
 void draw() {
-  //{!2} Looping but skipping the edge cells
+  // Looping but skipping the edge cells
   for (int x = 1; x < columns - 1; x++) {
     for (int y = 1; y < rows - 1; y++) {
       int neighborSum = 0;
       for (int i = -1; i <= 1; i++) {
         for (int j = -1; j <= 1; j++) {
-          //{!1 .bold} Use the previous state when counting neighbors
+          // Use the previous state when counting neighbors
           neighborSum += board[x + i][y + j].previous;
         }
       }
       neighborSum -= board[x][y].previous;
 
-      //{!3} Set the cell's new state based on the neighbor count
+      // Set the cell's new state based on the neighbor count
       if (board[x][y].state == 1 && neighborSum < 2) {
         board[x][y].state = 0;
       } else if (board[x][y].state == 1 && neighborSum > 3) {
@@ -47,10 +47,10 @@ void draw() {
 
   for (int i = 0; i < columns; i++) {
     for (int j = 0; j < rows; j++) {
-      //{!1} evaluates to 255 when state is 0 and 0 when state is 1
+      // evaluates to 255 when state is 0 and 0 when state is 1
       board[i][j].show();
 
-      //{!1} save the previous state before the next generation!
+      // save the previous state before the next generation!
       board[i][j].previous = board[i][j].state;
     }
   }
